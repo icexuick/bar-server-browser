@@ -1,0 +1,74 @@
+* { box-sizing: border-box; }
+
+html, body {
+    margin: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    color: #fff;
+    &.dev {
+        background: linear-gradient(180deg,rgba(0,0,0,.84),rgba(0,0,0,.84)),url("images/background.jpg");
+    }
+}
+
+.banner{
+    img {
+        max-height: 70px;
+        margin-top: 35px;
+    }
+    &__subtext {
+        text-align: center;
+        letter-spacing: 3px;
+        font-weight: 400;
+        text-transform: uppercase;
+        margin-left: 2px;
+    }
+}
+
+.battles {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: row;
+    padding: 25px;
+    flex-wrap: wrap;
+}
+
+.battle {
+    @media screen and (max-width: 900px) {
+        width: 100%;
+        margin: 10px 0;
+    }
+    width: calc(50% - 20px);
+    background: red;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    &__top{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    &__founder{
+        background: green;
+    }
+    &__title{
+        background: blue;
+        flex-grow: 1;
+        text-align: center;
+    }
+    &__player-count{
+        background: orange;
+    }
+    &__players{
+        display: flex;
+        flex-direction: column;
+    }
+    &__player{
+        background: purple;
+    }
+}
