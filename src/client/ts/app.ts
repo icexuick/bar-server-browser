@@ -28,7 +28,8 @@ const vue = new Vue({
     },
     created() {
         //const ws = new WebSocket(`wss://${location.href.split("\/\/")[1]}`);
-        const ws = new WebSocket(`wss://${location.hostname}:${parseInt(location.port) + 1}`);
+        //const ws = new WebSocket(`wss://${location.hostname}:${parseInt(location.port) + 1}`);
+        const ws = new WebSocket(`wss://jazcash.com/test/`);
 
         ws.onopen = event => console.log("Connected to WS");
         ws.onmessage = event => {
