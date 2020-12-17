@@ -15,8 +15,7 @@
     "dependencies": {
         "vue": "^2.6.12",
         "vue-loader": "^15.9.5",
-        "vue-template-compiler": "^2.6.12",
-        "ws": "^7.4.1"
+        "vue-template-compiler": "^2.6.12"
     },
     "devDependencies": {
         "@types/clone-deep": "^4.0.1",
