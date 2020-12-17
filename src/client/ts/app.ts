@@ -7,7 +7,9 @@ import config from "../../../config.json";
 
 declare var __IS_DEV__: boolean;
 
-if (__IS_DEV__) {
+const insideIframe = window !== window.parent;
+
+if (__IS_DEV__ || !insideIframe) {
     document.body.classList.add("dev");
 }
 
