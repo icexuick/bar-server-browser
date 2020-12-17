@@ -4,7 +4,6 @@ import webpack from "webpack";
 import webpackDevMiddleware from "webpack-dev-middleware";
 import webpackHotMiddleware from "webpack-hot-middleware";
 import ws from "express-ws";
-//import http from "http";
 import https from "https";
 import fs from "fs";
 
@@ -17,7 +16,6 @@ export interface ServerConfig {
 
 export class Server {
     public app: ws.Application;
-    //public server: http.Server;
     public server: https.Server;
     public wss: ws.Instance;
     
@@ -31,7 +29,6 @@ export class Server {
 
         const expressApp = express();
         this.server = https.createServer({ key, cert }, expressApp);
-        //this.server = http.createServer(expressApp);
         this.wss = ws(expressApp, this.server);
         this.app = this.wss.app;
 
