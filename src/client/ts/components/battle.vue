@@ -49,12 +49,6 @@ import { Battle } from "../../../common/model/battle";
 import { Player } from "../../../common/model/player";
 
 export default Vue.extend({
-    // data() {
-    //     return {
-    //         battle: {} as Battle,
-    //         message: String
-    //     }
-    // },
     props: {
         battle: {
             type: Object
