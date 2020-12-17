@@ -25,8 +25,7 @@ const vue = new Vue({
         BattleComponent
     },
     created() {
-        //const s = location.protocol === "https:" ? "s" : "";
-        const s = "";
+        const s = location.protocol === "https:" ? "s" : "";
         const ws = new WebSocket(`ws${s}://${location.hostname}:${config.port}`);
 
         ws.onopen = event => console.log("Connected to WS");
