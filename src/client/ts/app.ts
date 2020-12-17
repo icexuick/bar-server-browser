@@ -25,7 +25,7 @@ const vue = new Vue({
         BattleComponent
     },
     created() {
-        const ws = new WebSocket(`wss://${location.host}`);
+        const ws = new WebSocket(`wss://${location.href.split("\/\/")[1]}`);
 
         ws.onopen = event => console.log("Connected to WS");
         ws.onmessage = event => {
