@@ -6,7 +6,7 @@ declare const __IS_DEV__: boolean;
 
 (async () => {
     const dataFetcher = new DataFetcher(config);
-    const server = new Server({ port: 3456, isDev: __IS_DEV__ });
+    const server = new Server({ port: config.port, isDev: __IS_DEV__ });
 
     await dataFetcher.listen();
 

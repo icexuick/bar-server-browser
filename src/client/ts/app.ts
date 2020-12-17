@@ -3,6 +3,7 @@ import "../styles/styles.scss";
 import Vue from "vue";
 import BattleComponent from "components/battle.vue";
 import { Battle } from "common/model/battle";
+import config from "../../../config.json";
 
 declare var __IS_DEV__: boolean;
 
@@ -24,7 +25,7 @@ const vue = new Vue({
         BattleComponent
     },
     created() {
-        const ws = new WebSocket("ws://localhost:3456");
+        const ws = new WebSocket(`ws://localhost:${config.port}`);
 
         ws.onopen = event => console.log("Connected to WS");
         ws.onmessage = event => {

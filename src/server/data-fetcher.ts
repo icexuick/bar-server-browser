@@ -3,8 +3,8 @@ import { Player } from "common/model/player";
 import { SpringLobbyProtocolClient } from "sluts";
 
 export interface DataFetcherConfig {
-    host: string;
-    port: number;
+    slp_host: string;
+    slp_port: number;
     username: string;
     password: string;
 }
@@ -24,7 +24,7 @@ export class DataFetcher {
     }
 
     public async listen() {
-        await this.slpClient.connect(this.config.host, this.config.port);
+        await this.slpClient.connect(this.config.slp_host, this.config.slp_port);
 
         this.slpClient.onResponse("ADDUSER").add(data => {
             this.players[data.userName] = {
