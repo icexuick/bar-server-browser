@@ -3,8 +3,7 @@ import express from "express";
 import webpack from "webpack";
 import webpackDevMiddleware from "webpack-dev-middleware";
 import webpackHotMiddleware from "webpack-hot-middleware";
-import ws from "express-ws";
-//import http from "http";
+import WebSocket from "ws";
 import https from "https";
 import fs from "fs";
 
@@ -16,10 +15,10 @@ export interface ServerConfig {
 }
 
 export class Server {
-    public app: ws.Application;
-    //public server: http.Server;
+    public app: express.Application;
     public server: https.Server;
-    public wss: ws.Instance;
+    public serverWs: https.Server;
+    public wss: WebSocket.Server;
     
     protected config: ServerConfig;
 
@@ -28,12 +27,13 @@ export class Server {
 
         const key = fs.readFileSync(this.config.sslKeyLocation);
         const cert = fs.readFileSync(this.config.sslCertLocation);
-
-        const expressApp = express();
-        this.server = https.createServer({ key, cert }, expressApp);
-        //this.server = http.createServer(expressApp);
-        this.wss = ws(expressApp, this.server);
-        this.app = this.wss.app;
+        
+        this.app = express();
+        this.server = https.createServer({ key, cert }, this.app);
+        this.serverWs = https.createServer({ key, cert });
+        this.wss = new WebSocket.Server({
+            server: this.serverWs
+        });
 
         this.app.set("view engine", "ejs");
         this.app.set("views", "dist/client");
@@ -59,7 +59,10 @@ export class Server {
         return new Promise<void>(resolve => {
             this.server.listen(this.config.port, () => {
                 console.log(`Server running at https://localhost:${this.config.port}`);
-                resolve();
+                this.serverWs.listen(this.config.port + 1, () => {
+                    console.log(`WebSocket server running at https://localhost:${this.config.port + 1}`);
+                    resolve();
+                });
             });
         });
     }

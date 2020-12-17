@@ -10,17 +10,18 @@ declare const __IS_DEV__: boolean;
 
     await dataFetcher.listen();
 
-    server.app.ws("/", async (ws, req) => {
+    server.wss.on("connection", async (ws, req) => {
+        console.log("client connected");
         ws.send(JSON.stringify(dataFetcher.getActiveBattles()));
     });
 
-    const clients = server.wss.getWss().clients;
+    await server.start();
+
+    const clients = server.wss.clients;
     setInterval(() => {
         const battlesStr = JSON.stringify(dataFetcher.getActiveBattles());
         clients.forEach(client => {
             client.send(battlesStr);
         });
     }, 5000);
-
-    await server.start();
 })();
