@@ -31,8 +31,9 @@ const vue = new Vue({
 
         ws.onopen = event => console.log("Connected to WS");
         ws.onmessage = event => {
-            const battles = JSON.parse(event.data);
-            this.battles = battles;
+            const battles = JSON.parse(event.data) as Battle[];
+            this.battles = battles.sort((a, b) => b.players.length - a.players.length);
+            console.log(battles);
         };
     }
 });

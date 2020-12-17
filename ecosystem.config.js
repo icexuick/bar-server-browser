@@ -1,6 +1,6 @@
 module.exports = {
     apps: [{
-        name: "bar-server-browser",
+        name: "bar-battles",
         script: "npm",
         args: "start"
     }]
