@@ -4,25 +4,31 @@ import webpack from "webpack";
 import webpackDevMiddleware from "webpack-dev-middleware";
 import webpackHotMiddleware from "webpack-hot-middleware";
 import ws from "express-ws";
-import http from "http";
+import https from "https";
+import fs from "fs";
 
 export interface ServerConfig {
-    port: number;
     isDev: boolean;
+    port: number;
+    sslKeyLocation: string;
+    sslCertLocation: string;
 }
 
 export class Server {
     public app: ws.Application;
-    public server: http.Server;
+    public server: https.Server;
     public wss: ws.Instance;
     
     protected config: ServerConfig;
 
-    constructor(config: ServerConfig = { port: 4086, isDev: false }) {
+    constructor(config: ServerConfig) {
         this.config = config;
 
+        const key = fs.readFileSync(this.config.sslKeyLocation);
+        const cert = fs.readFileSync(this.config.sslCertLocation);
+
         const expressApp = express();
-        this.server = http.createServer(expressApp);
+        this.server = https.createServer({ key, cert }, expressApp);
         this.wss = ws(expressApp, this.server);
         this.app = this.wss.app;
 
@@ -49,7 +55,7 @@ export class Server {
     public async start() {
         return new Promise<void>(resolve => {
             this.server.listen(this.config.port, () => {
-                console.log(`Server running at http://localhost:${this.config.port}`);
+                console.log(`Server running at https://localhost:${this.config.port}`);
                 resolve();
             });
         });

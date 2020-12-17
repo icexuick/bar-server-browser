@@ -6,7 +6,7 @@ declare const __IS_DEV__: boolean;
 
 (async () => {
     const dataFetcher = new DataFetcher(config);
-    const server = new Server({ port: config.port, isDev: __IS_DEV__ });
+    const server = new Server({ isDev: __IS_DEV__, port: config.port, sslKeyLocation: config.ssl_key, sslCertLocation: config.ssl_cert });
 
     await dataFetcher.listen();
 
