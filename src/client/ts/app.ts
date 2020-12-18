@@ -16,24 +16,35 @@ if (__IS_DEV__ || !insideIframe) {
 const vue = new Vue({
     el: "#vue",
     template: `
-    <div class="battles">
+    <div v-if="battles && !battles.length" class="empty">
+        No active battles 😞
+    </div>
+    <div v-else class="battles">
         <battle-component v-for="battle in battles" :battle="battle" v-bind:key="battle.battleId" />
     </div>
     `,
     data: {
-        battles: [] as Battle[]
+        battles: undefined as Battle[] | undefined
     },
     components: {
         BattleComponent
     },
-    created() {
-        const ws = new WebSocket(`wss://${location.href.split("\/\/")[1]}`);
+    methods: {
+        listenForBattleUpdates() {
+            return new Promise<void>(resolve => {
+                const ws = new WebSocket(`wss://${location.href.split("\/\/")[1]}`);
 
-        ws.onopen = event => console.log("Connected to WS");
-        ws.onmessage = event => {
-            const battles = JSON.parse(event.data) as Battle[];
-            this.battles = battles.sort((a, b) => b.players.length - a.players.length);
-            console.log(battles);
-        };
+                ws.onopen = event => console.log("Connected to WebSocket");
+                ws.onmessage = event => {
+                    const battles = JSON.parse(event.data) as Battle[];
+                    this.battles = battles.sort((a, b) => b.players.length - a.players.length);
+                    console.log(battles);
+                    resolve();
+                };
+            });
+        }
+    },
+    async beforeMount () {
+        await this.listenForBattleUpdates();
     }
 });
