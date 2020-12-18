@@ -51,7 +51,7 @@ export default Vue.extend({
     computed: {
         mapUrl: function() {
             const battle = this.battle as Battle;
-            return battle.map.replace(/\s/g, "_");
+            return battle.map.replace(/\s/g, "_").toLowerCase();
         },
         mapName: function() {
             const battle = this.battle as Battle;

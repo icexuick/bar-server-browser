@@ -55,7 +55,7 @@ export class DataFetcher {
                 ip: data.ip,
                 port: data.port,
                 locked: false,
-                map: data.map.toLowerCase(),
+                map: data.map,
                 mapHash: data.mapHash,
                 maxPlayers: data.maxPlayers,
                 passworded: data.passworded,
@@ -80,7 +80,7 @@ export class DataFetcher {
             battle.locked = data.locked;
             battle.spectators = data.spectatorCount;
             battle.mapHash = data.mapHash;
-            battle.map = data.mapName.toLowerCase();
+            battle.map = data.mapName;
         });
 
         this.slpClient.onResponse("JOINEDBATTLE").add(data => {
