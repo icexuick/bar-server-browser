@@ -37,8 +37,17 @@ const vue = new Vue({
 
                 ws.onopen = event => console.log("Connected to WebSocket");
                 ws.onmessage = event => {
-                    const battles = JSON.parse(event.data) as Battle[];
-                    this.battles = battles.sort((a, b) => b.players.length - a.players.length);
+                    let battles = JSON.parse(event.data) as Battle[];
+                    const passwordedOrLocked: Battle[] = [];
+                    battles.forEach((battle, i) => {
+                        if (battle.passworded || battle.locked) {
+                            const battle = battles.splice(i, 1)[0];
+                            passwordedOrLocked.unshift(battle);
+                        }
+                    });
+                    battles = battles.sort((a, b) => b.players.length - a.players.length);
+                    battles.push(...passwordedOrLocked);
+                    this.battles = battles;
                     console.log(battles);
                     resolve();
                 };
