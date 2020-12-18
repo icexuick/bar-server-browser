@@ -1,5 +1,7 @@
 import "../styles/styles.scss";
 
+import "iframe-resizer";
+
 import Vue from "vue";
 import BattleComponent from "components/battle.vue";
 import { Battle } from "common/model/battle";

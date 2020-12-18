@@ -92,14 +92,14 @@ html, body {
         justify-content: space-between;
         align-items: center;
         margin-top: 1px;
-        padding: 4px 7px;
+        padding: 4px;
     }
     &__ingame{
         display: flex;
         align-items: center;
-        margin-right: 3px;
+        margin-right: 4px;
         img {
-            max-height: 18px;
+            max-height: 32px;
         }
     }
     &__title{

@@ -13,6 +13,7 @@
     "author": "Jazcash",
     "license": "ISC",
     "dependencies": {
+        "iframe-resizer": "^4.2.11",
         "vue": "^2.6.12",
         "vue-loader": "^15.9.5",
         "vue-template-compiler": "^2.6.12"
