@@ -5,7 +5,6 @@ import "iframe-resizer/js/iframeResizer.contentWindow";
 import Vue from "vue";
 import BattleComponent from "components/battle.vue";
 import { Battle } from "common/model/battle";
-import config from "../../../config.json";
 
 declare var __IS_DEV__: boolean;
 
