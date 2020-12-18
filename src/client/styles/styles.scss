@@ -16,11 +16,15 @@ html, body {
 }
 
 .banner{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     img {
         max-height: 70px;
         margin-top: 35px;
     }
     &__subtext {
+        display: flex;
         text-align: center;
         letter-spacing: 3px;
         font-weight: 400;
@@ -36,6 +40,7 @@ html, body {
     flex-direction: row;
     padding: 25px;
     flex-wrap: wrap;
+    text-shadow: 1px 1px rgba(0, 0, 0, 0.3);
 }
 
 .battle {
