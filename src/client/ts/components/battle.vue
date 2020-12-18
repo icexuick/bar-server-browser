@@ -1,5 +1,6 @@
 <template>
     <div class="battle">
+        <div class="battle__background" style="--bg: url(images/maps/unknown.jpg)"></div>
         <div class="battle__background" :style="'--bg: url(images/maps/'+ mapUrl +'.jpg)'"></div>
         <div class="battle__top">
             <div class="battle__title">
@@ -20,12 +21,16 @@
                 <div class="battle__flag">
                     <img :src="'images/flags/' + player.country.toLowerCase() + '.png'">
                 </div>
-                <div class="battle__username">
-                    {{player.username}}
-                </div>
                 <div class="battle__rank">
                     <img v-if="player.status" :src="'images/ranks/' + (player.status.rank + 1) + '.png'">
                     <img v-else src="images/ranks/1.png">
+                </div>
+                <div class="battle__username">
+                    {{player.username}}
+                </div>
+                <div class="battle__ingame">
+                    <img v-if="player.status && player.status.ingame" src="images/ingame.png">
+                    <img v-else src="images/battle.png">
                 </div>
             </div>
         </div>
@@ -33,30 +38,6 @@
 </template>
 
 <script lang="ts">
-// export interface Battle {
-//     battleId: number;
-//     founder: string;
-//     ip: string;
-//     port: number;
-//     maxPlayers: number;
-//     passworded: boolean;
-//     locked: boolean;
-//     rank: number;
-//     map: string;
-//     mapHash: number;
-//     title: string;
-//     game: string;
-//     spectators: number;
-//     players: { [username: string]: Player };
-// }
-// export interface Player {
-//     userId: number;
-//     username: string;
-//     country: string;
-//     status?: PlayerStatus;
-//     battleId?: number;
-// }
-
 import Vue from "vue";
 import { Battle } from "../../../common/model/battle";
 import { Player } from "../../../common/model/player";

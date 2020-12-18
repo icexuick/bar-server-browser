@@ -63,7 +63,16 @@ export class DataFetcher {
                 title: data.title,
                 players: {},
                 spectators: 0
+            };
+
+            const founder = this.players[data.founder];
+            if (founder && founder.status && !founder.status.bot) {
+                this.battles[data.battleId].players[founder.username] = founder;
             }
+        });
+
+        this.slpClient.onResponse("BATTLECLOSED").add(data => {
+            delete this.battles[data.battleId];
         });
 
         this.slpClient.onResponse("UPDATEBATTLEINFO").add(data => {

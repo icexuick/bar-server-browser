@@ -40,7 +40,7 @@ html, body {
     flex-direction: row;
     padding: 25px;
     flex-wrap: wrap;
-    text-shadow: 1px 1px rgba(0, 0, 0, 0.3);
+    text-shadow: 1px 1px rgba(0, 0, 0, 0.5);
 }
 
 .battle {
@@ -110,27 +110,36 @@ html, body {
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
+        justify-content: center;
     }
     &__player{
-        background: rgba(255, 255, 255, 0.15);
+        background: rgba(255, 255, 255, 0.2);
         display: flex;
         align-items: center;
         margin: 5px;
         padding: 2px 5px;
-        border: 1px solid rgba(255, 255, 255, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.3);
         border-radius: 3px;
+        & > div {
+            margin: 0 2px;
+        }
     }
     &__flag{
-        margin-right: 5px;
+
+    }
+    &__ingame{
+        display: flex;
+        img {
+            max-height: 16px;
+        }
     }
     &__username{
         font-size: 13px;
     }
     &__rank{
-        margin-left: 5px;
         display: flex;
         img {
-            max-height: 15px;
+            max-height: 16px;
         }
     }
 }
