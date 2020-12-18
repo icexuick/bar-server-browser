@@ -2,7 +2,7 @@ import { Player } from "./player";
 
 export interface Battle<PlayersType extends { [username: string]: Player } | Player[] = Player[]> {
     battleId: number;
-    founder: string;
+    founder: Player;
     ip: string;
     port: number;
     maxPlayers: number;

@@ -50,7 +50,7 @@ export class DataFetcher {
         this.slpClient.onResponse("BATTLEOPENED").add(data => {
             this.battles[data.battleId] = {
                 battleId: data.battleId,
-                founder: data.founder,
+                founder: this.players[data.founder],
                 game: data.gameName,
                 ip: data.ip,
                 port: data.port,
