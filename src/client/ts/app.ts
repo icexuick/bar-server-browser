@@ -1,6 +1,6 @@
 import "../styles/styles.scss";
 
-import "iframe-resizer";
+import "iframe-resizer/js/iframeResizer.contentWindow";
 
 import Vue from "vue";
 import BattleComponent from "components/battle.vue";
