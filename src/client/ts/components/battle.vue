@@ -3,6 +3,10 @@
         <div class="battle__background" style="--bg: url(images/maps/unknown.jpg)"></div>
         <div class="battle__background" :style="'--bg: url(images/maps/'+ mapUrl +'.jpg)'"></div>
         <div class="battle__top">
+            <div class="battle__ingame">
+                <img v-if="isBattleIngame" src="images/ingame.png">
+                <img v-else src="images/battle.png">
+            </div>
             <div class="battle__title">{{battle.title}}</div>
             <div class="battle__map">{{mapName}}</div>
             <div v-if="battle.locked || battle.passworded" class="battle__lock">
@@ -28,10 +32,6 @@
                     <img v-else src="images/ranks/1.png">
                 </div>
                 <div class="battle__username">{{player.username}}</div>
-                <div class="battle__ingame">
-                    <img v-if="player.status && player.status.ingame" src="images/ingame.png">
-                    <img v-else src="images/battle.png">
-                </div>
             </div>
         </div>
     </div>
@@ -64,6 +64,12 @@ export default Vue.extend({
         spectatorCount: function() {
             const battle = this.battle as Battle;
             return battle.spectators - 1;
+        },
+        isBattleIngame: function() {
+            const battle = this.battle as Battle;
+            const playersIngame = battle.players.filter(player => player.status?.ingame).length;
+            const moreThanHalfIngame = playersIngame / battle.players.length >= 0.5;
+            return moreThanHalfIngame;
         }
     }
 });
