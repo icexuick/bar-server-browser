@@ -8,10 +8,10 @@
                 <img v-else src="images/battle.png">
             </div>
             <div class="battle__title">{{battle.title}}</div>
-            <div class="battle__map">{{mapName}}</div>
             <div v-if="battle.locked || battle.passworded" class="battle__lock">
                 <img src="images/lock.png">
             </div>
+            <div class="battle__map">{{mapName}}</div>
             <div v-if="playerCount" class="battle__player-count">
                 {{playerCount}}
                 <img src="images/player.png">

@@ -97,7 +97,7 @@ html, body {
     &__ingame{
         display: flex;
         align-items: center;
-        margin-right: 4px;
+        margin-right: 5px;
         img {
             max-height: 32px;
         }
@@ -113,7 +113,7 @@ html, body {
     &__lock{
         display: flex;
         align-items: center;
-        padding-right: 5px;
+        margin-left: 5px;
         img {
             max-height: 16px;
         }
